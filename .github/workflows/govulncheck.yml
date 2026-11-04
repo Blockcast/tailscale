@@ -10,7 +10,9 @@ on:
 
 jobs:
   source-scan:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default-tools
+      labels: arc-light
 
     steps:
       - name: Check out code into the Go module directory

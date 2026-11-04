@@ -10,7 +10,9 @@ concurrency:
 
 jobs:
   update-webclient-prebuilt:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default-tools
+      labels: arc-light
 
     steps:
       - name: Check out code
