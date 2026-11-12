@@ -12,7 +12,10 @@ on:
         required: true
 jobs:
   flakehub-publish:
-    runs-on: "ubuntu-latest"
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on:
+      group: default-tools
+      labels: arc-light
     permissions:
       id-token: "write"
       contents: "read"

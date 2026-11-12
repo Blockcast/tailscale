@@ -16,6 +16,7 @@ on:
 
 jobs:
   test:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     strategy:
       # Don't abort the entire matrix if one element fails.
       fail-fast: false
@@ -66,7 +67,9 @@ jobs:
           - { image: "debian:stable-slim", deps: "curl", version: "1.80.0" }
           - { image: "ubuntu:24.04", deps: "curl", version: "1.80.0" }
           - { image: "fedora:latest", deps: "curl", version: "1.80.0" }
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default-tools
+      labels: arc-dind
     container:
       image: ${{ matrix.image }}
       options: --user root
@@ -115,8 +118,11 @@ jobs:
           tailscale --version | grep -q "^${{ matrix.version }}" || { echo "Version mismatch!"; exit 1; }
         fi
   notify-slack:
+    if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
     needs: test
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default-tools
+      labels: arc-light
     steps:
       - name: Notify Slack of failure on scheduled runs
         if: failure() && github.event_name == 'schedule'

@@ -1,0 +1,9 @@
+# ARC runner labels are organization-provided self-hosted labels.
+self-hosted-runner:
+  labels:
+    - default-tools
+    - arc-light
+    - arc-dind
+    - self-hosted
+    - linux
+    - vm

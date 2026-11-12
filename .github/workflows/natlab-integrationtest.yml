@@ -18,7 +18,11 @@ on:
       - "main"
 jobs:
   natlab-integrationtest:
-    runs-on: ubuntu-latest
+    # Blockcast's ARC DinD pool has no KVM device; keep NATLab on upstream's KVM runners.
+    if: github.repository == 'tailscale/tailscale'
+    runs-on:
+      group: default-tools
+      labels: arc-dind
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2

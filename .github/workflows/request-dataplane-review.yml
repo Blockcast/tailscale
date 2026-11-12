@@ -11,9 +11,12 @@ on:
 
 jobs:
   request-dataplane-review:
-    if: github.event.pull_request.draft == false
+    # The visibility app and dataplane team belong to the upstream repository.
+    if: github.repository == 'tailscale/tailscale' && github.event.pull_request.draft == false && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
     name: Request Dataplane Review
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default-tools
+      labels: arc-light
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
