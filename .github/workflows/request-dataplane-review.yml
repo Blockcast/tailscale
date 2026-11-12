@@ -11,7 +11,8 @@ on:
 
 jobs:
   request-dataplane-review:
-    if: github.event.pull_request.draft == false && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    # The visibility app and dataplane team belong to the upstream repository.
+    if: github.repository == 'tailscale/tailscale' && github.event.pull_request.draft == false && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
     name: Request Dataplane Review
     runs-on:
       group: default-tools
