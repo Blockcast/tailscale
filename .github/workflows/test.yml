@@ -85,7 +85,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-dind
-    timeout-minutes: 60
+    timeout-minutes: 150 # measured 67-100m on ARC (BLO-54910)
     needs: gomod-cache
     strategy:
       fail-fast: false # don't abort the entire matrix if one element fails
@@ -135,7 +135,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
-    timeout-minutes: 60
+    timeout-minutes: 150 # measured 67-100m on ARC (BLO-54910)
     needs: gomod-cache
     steps:
     - name: checkout
@@ -367,7 +367,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-dind
-    timeout-minutes: 60
+    timeout-minutes: 60 # deliberately tight: past runs hung 180-263m (BLO-54910)
     container:
       image: golang:latest
       options: --privileged
@@ -453,7 +453,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
-    timeout-minutes: 60
+    timeout-minutes: 150 # measured 67-100m on ARC (BLO-54910)
     steps:
     - name: checkout
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -648,7 +648,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
-    timeout-minutes: 60
+    timeout-minutes: 150 # measured 67-100m on ARC (BLO-54910)
     needs: gomod-cache
     steps:
     - name: checkout
@@ -742,7 +742,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-dind
-    timeout-minutes: 60
+    timeout-minutes: 60 # deliberately tight: past runs hung 180-263m (BLO-54910)
     steps:
     - name: build fuzzers
       id: build
@@ -904,7 +904,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
-    timeout-minutes: 60
+    timeout-minutes: 150 # measured 67-100m on ARC (BLO-54910)
     needs: gomod-cache
     name: staticcheck (${{ matrix.name }})
     strategy:
