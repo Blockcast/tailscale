@@ -16,6 +16,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
+    timeout-minutes: 60
     permissions:
       id-token: "write"
       contents: "read"

@@ -70,6 +70,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-dind
+    timeout-minutes: 60
     container:
       image: ${{ matrix.image }}
       options: --user root
@@ -123,6 +124,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
+    timeout-minutes: 60
     steps:
       - name: Notify Slack of failure on scheduled runs
         if: failure() && github.event_name == 'schedule'

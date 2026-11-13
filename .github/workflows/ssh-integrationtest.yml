@@ -18,6 +18,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-dind
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
