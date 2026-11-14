@@ -15,6 +15,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
+    timeout-minutes: 60
     env:
       GOOS: "${{ matrix.GOOS }}"
       GOARCH: "${{ matrix.GOARCH }}"
@@ -37,6 +38,7 @@ jobs:
     runs-on:
       group: default-tools
       labels: arc-light
+    timeout-minutes: 60
     needs: build
     permissions:
       contents: write
